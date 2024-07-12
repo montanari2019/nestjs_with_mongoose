@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type BacenDocumentType = HydratedDocument<BacenSchema>;
 
-@Schema({ collection: 'bacen', timestamps: true })
+@Schema({ collection: 'bacen', timestamps: { createdAt: "created_at", updatedAt: "updated_at" }, })
 export class BacenSchema {
   @Prop()
   data_movimento: Date;

@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UploadedFile, UseInterceptors, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UploadedFile, UseInterceptors, Put, Query } from '@nestjs/common';
 import { BacenService } from './bacen.service';
 import { CreateBacenDto } from './dto/create-bacen.dto';
 import { UpdateBacenDto } from './dto/update-bacen.dto';
 import { dateFromatter } from 'src/utils';
-import { ApiBody, ApiConsumes, ApiOkResponse } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('bacen')
@@ -68,5 +68,12 @@ export class BacenController {
   @Delete()
   deleteMany(){
     return this.bacenService.deleteMany()
+  }
+
+  @Get("get/date")
+  @ApiQuery({ name: 'data_movimento', required: true })
+  findDateMovimento(  @Query('data_movimento') data_movimento: string,){
+
+    return this.bacenService.verifyDate(new Date(data_movimento))
   }
 }
