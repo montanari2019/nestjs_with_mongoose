@@ -1,6 +1,5 @@
 <p align="center" width="500">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-
   <a href="https://www.mongodb.com/" target="blank"><img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
