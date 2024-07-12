@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UploadedFile, UseInterceptors, Put } from '@nestjs/common';
 import { BacenService } from './bacen.service';
 import { CreateBacenDto } from './dto/create-bacen.dto';
 import { UpdateBacenDto } from './dto/update-bacen.dto';
@@ -50,7 +50,19 @@ export class BacenController {
   }
   @Get()
   findAll() {
+    console.log("Busca todos controler: ",dateFromatter.format(new Date()))
     return this.bacenService.findAll();
+  }
+
+  @Post()
+  createUnique() {
+    return this.bacenService.createUnique();
+  }
+
+
+  @Put()
+  updateOne(){
+    return this.bacenService.update()
   }
 
   @Delete()

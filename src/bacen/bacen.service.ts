@@ -46,13 +46,9 @@ export class BacenService {
     console.log(spreadSheetFinal[0])
     
     await this.bacenModel.insertMany(spreadSheetFinal)
+ 
 
-    
-    
 
-    // const insertPrisma = await this.prismaService.bacen.createMany({
-    //   data: spreadSheetFinal
-    // })
 
     console.log("Fim da inserção mongoDB: ",dateFromatter.format(new Date()))
 
@@ -61,16 +57,59 @@ export class BacenService {
 
   }
 
-  findAll() {
-    return `This action returns all bacen`;
+
+  async createUnique(){
+
+    const save = await this.bacenModel.create({
+      data_movimento: new Date(),
+      devedor_sfn: 2000,
+      prejuizo_sfn: 200,
+      vencido_sfn: 0,
+      modalidade_bacen: "vagabundo",
+      submodalidade_bacen: "vabaundo submodalidade",
+      cpf_cnpj: "99988877723",
+
+    })
+
+    return save
+
+  }
+
+  async findAll() {
+    console.log("Busca todos services: ",dateFromatter.format(new Date()))
+
+    const data = await this.bacenModel.find({
+     modalidade_bacen: "EMPRESTIMOS"
+    })
+    
+    console.log("Fim da busca: ",dateFromatter.format(new Date()))
+    return data
   }
 
   findOne(id: number) {
     return `This action returns a #${id} bacen`;
   }
 
-  update(id: number, updateBacenDto: UpdateBacenDto) {
-    return `This action updates a #${id} bacen`;
+  async update() {
+
+    const dataUpdate =  {
+      data_movimento: new Date(),
+      devedor_sfn: 2000,
+      prejuizo_sfn: 200,
+      vencido_sfn: 52145540,
+      modalidade_bacen: "vagabundo de olinda",
+      submodalidade_bacen: "vabaundo submodalidade de onlinda",
+      cpf_cnpj: "99988877723",
+    }
+ 
+
+    const uptade = await this.bacenModel.findOneAndUpdate(
+      { cpf_cnpj: "99988877723"},
+      dataUpdate,
+      
+
+    )
+    return uptade
   }
 
   remove(id: number) {
